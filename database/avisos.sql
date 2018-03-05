@@ -18,7 +18,7 @@ CREATE TABLE "Aviso" (
 
 GO
 
--- Table documentation comment 2
+-- CREACION DE LA TABLA USUARIO 
 CREATE TABLE "Usuarios" (
     "UsuarioID" int  NOT NULL ,
     -- Field documentation comment 3 FK >- Aviso.AvisoID
