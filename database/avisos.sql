@@ -7,7 +7,7 @@ CREATE TABLE "aviso" (
     "titulo" varchar(200)  NOT NULL ,
     "imagen" image  NOT NULL ,
     "texto" varchar(200)  NOT NULL ,
-    "estado" enum('Pendiente','Activo','Inactivo')  NOT NULL ,
+    "estado" ENUM('pendiente','activo','inactivo')  NOT NULL ,
     "fecha" date  NOT NULL ,
     CONSTRAINT "pk_aviso" PRIMARY KEY ("avisoID")
 )
@@ -15,7 +15,7 @@ CREATE TABLE "aviso" (
 GO
 
 -- CREACION DE LA TABLA USUARIO --
-CREATE TABLE "Usuarios" (
+CREATE TABLE "usuarios" (
     "asuarioID" int  NOT NULL ,
     -- Field documentation comment 3 FK >- Aviso.AvisoID
     "nombre" varchar(200)  NOT NULL ,
@@ -53,7 +53,7 @@ CREATE TABLE "categoria_aviso" (
     "categoria_avisoID" int  NOT NULL ,
     "categoriaID" int  NOT NULL ,
     "cvisoID" int  NOT NULL ,
-    CONSTRAINT "pk_categoria_aviso" PRIMARY KEY ("aategoria_avisoID")
+    CONSTRAINT "pk_categoria_aviso" PRIMARY KEY ("categoria_avisoID")
 )
 
 GO
