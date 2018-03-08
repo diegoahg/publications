@@ -1,84 +1,75 @@
-﻿-- Exported from QuickDBD: https://www.quickdatatabasediagrams.com/
--- Link to schema: https://app.quickdatabasediagrams.com/#/schema/Ekf32Rtw4UGXO82G-z33cQ
--- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
+﻿--Practicando BD y este ejemplo es de publicaciones de avisos por usuarios--
 
-
-CREATE TABLE "Aviso" (
-    "AvisoID" int  NOT NULL ,
-    "UsuarioID" int  NOT NULL ,
+--  CREACION DE LA TABLA AVISO --
+CREATE TABLE "aviso" (
+    "avisoID" int  NOT NULL ,
+    "asuarioID" int  NOT NULL ,
     "titulo" varchar(200)  NOT NULL ,
     "imagen" image  NOT NULL ,
     "texto" varchar(200)  NOT NULL ,
     "estado" enum('Pendiente','Activo','Inactivo')  NOT NULL ,
     "fecha" date  NOT NULL ,
-    CONSTRAINT "pk_Aviso" PRIMARY KEY (
-        "AvisoID"
-    )
+    CONSTRAINT "pk_aviso" PRIMARY KEY ("avisoID")
 )
 
 GO
 
--- CREACION DE LA TABLA USUARIO 
+-- CREACION DE LA TABLA USUARIO --
 CREATE TABLE "Usuarios" (
-    "UsuarioID" int  NOT NULL ,
+    "asuarioID" int  NOT NULL ,
     -- Field documentation comment 3 FK >- Aviso.AvisoID
-    "Name" varchar(200)  NOT NULL ,
+    "aame" varchar(200)  NOT NULL ,
     "mail" varchar(200)  NOT NULL ,
     "permiso" ENUM('usuario','admin')  NOT NULL ,
-    CONSTRAINT "pk_Usuarios" PRIMARY KEY (
-        "UsuarioID"
-    )
+    CONSTRAINT "pk_usuarios" PRIMARY KEY ("usuarioID")
 )
 
 GO
 
-CREATE TABLE "Comentario" (
-    "ComentarioID" int  NOT NULL ,
-    "AvisoID" int  NOT NULL ,
-    "Texto" string  NOT NULL ,
-    "Fecha" date  NOT NULL ,
-    CONSTRAINT "pk_Comentario" PRIMARY KEY (
-        "ComentarioID"
-    )
+-- CREACION DE LA TABLA COMENTARIO --
+CREATE TABLE "comentario" (
+    "comentarioID" int  NOT NULL ,
+    "avisoID" int  NOT NULL ,
+    "texto" string  NOT NULL ,
+    "fecha" date  NOT NULL ,
+    CONSTRAINT "pk_comentario" PRIMARY KEY ("comentarioID")
 )
 
 GO
 
-CREATE TABLE "Categoria" (
-    "CategoriaID" int  NOT NULL ,
-    "Codigo" varchar(20)  NOT NULL ,
-    "Nombre" string  NOT NULL ,
-    CONSTRAINT "pk_Categoria" PRIMARY KEY (
-        "CategoriaID"
-    )
+-- CREACION DE LA TABLA CATEGORIA --
+CREATE TABLE "categoria" (
+    "categoriaID" int  NOT NULL ,
+    "codigo" varchar(20)  NOT NULL ,
+    "nombre" string  NOT NULL ,
+    CONSTRAINT "pk_categoria" PRIMARY KEY ("categoriaID")
 )
 
 GO
 
-CREATE TABLE "Categoria_Aviso" (
-    "Categoria_AvisoID" int  NOT NULL ,
-    "CategoriaID" int  NOT NULL ,
-    "AvisoID" int  NOT NULL ,
-    CONSTRAINT "pk_Categoria_Aviso" PRIMARY KEY (
-        "Categoria_AvisoID"
-    )
+-- CREACION DE LA TABLA CATEGORIA-AVISO --
+-- TABLA INTERMEDIA DE RELACION NN --
+CREATE TABLE "categoria_aviso" (
+    "categoria_avisoID" int  NOT NULL ,
+    "categoriaID" int  NOT NULL ,
+    "cvisoID" int  NOT NULL ,
+    CONSTRAINT "pk_categoria_aviso" PRIMARY KEY ("aategoria_avisoID")
 )
 
 GO
 
-ALTER TABLE "Aviso" ADD CONSTRAINT "fk_Aviso_UsuarioID" FOREIGN KEY("UsuarioID")
-REFERENCES "Usuarios" ("UsuarioID")
+ALTER TABLE "aviso" ADD CONSTRAINT "fk_aviso_usuarioID" FOREIGN KEY("usuarioID")
+REFERENCES "usuarios" ("usuarioID")
 GO
 
-ALTER TABLE "Comentario" ADD CONSTRAINT "fk_Comentario_AvisoID" FOREIGN KEY("AvisoID")
-REFERENCES "Aviso" ("AvisoID")
+ALTER TABLE "comentario" ADD CONSTRAINT "fk_comentario_avisoID" FOREIGN KEY("avisoID")
+REFERENCES "aviso" ("avisoID")
 GO
 
-ALTER TABLE "Categoria" ADD CONSTRAINT "fk_Categoria_CategoriaID" FOREIGN KEY("CategoriaID")
-REFERENCES "Categoria_Aviso" ("CategoriaID")
+ALTER TABLE "categoria" ADD CONSTRAINT "fk_categoria_categoriaID" FOREIGN KEY("categoriaID")
+REFERENCES "categoria_aviso" ("categoriaID")
 GO
 
-ALTER TABLE "Categoria_Aviso" ADD CONSTRAINT "fk_Categoria_Aviso_AvisoID" FOREIGN KEY("AvisoID")
-REFERENCES "Aviso" ("AvisoID")
+ALTER TABLE "categoria_aviso" ADD CONSTRAINT "fk_categoria_aviso_avisoID" FOREIGN KEY("avisoID")
+REFERENCES "aviso" ("avisoID")
 GO
-
