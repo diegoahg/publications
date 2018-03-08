@@ -18,7 +18,7 @@ GO
 CREATE TABLE "Usuarios" (
     "asuarioID" int  NOT NULL ,
     -- Field documentation comment 3 FK >- Aviso.AvisoID
-    "aame" varchar(200)  NOT NULL ,
+    "nombre" varchar(200)  NOT NULL ,
     "mail" varchar(200)  NOT NULL ,
     "permiso" ENUM('usuario','admin')  NOT NULL ,
     CONSTRAINT "pk_usuarios" PRIMARY KEY ("usuarioID")
